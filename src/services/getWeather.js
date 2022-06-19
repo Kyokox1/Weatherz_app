@@ -6,8 +6,17 @@ const options = {
 	}
 };
 
-export const getWeather = async ({ city }) => {
+export const getWeather = async ({ lat, long, city = "potosi" }) => {
 	try {
+		if ((lat, long)) {
+			const response = await fetch(
+				`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${lat}%2C${long}&days=3`,
+				options
+			);
+			const data = await response.json();
+			// console.log(data);
+			return data;
+		}
 		const response = await fetch(
 			`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city}&days=3`,
 			options

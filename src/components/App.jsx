@@ -19,7 +19,9 @@ import {
 } from "@chakra-ui/react";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
+import debounce from "just-debounce-it";
 import { MdGpsFixed, MdGpsNotFixed, MdClose } from "react-icons/md";
+import { getAutocomplete } from "../services/getAutocomplete";
 
 import { getWeather } from "../services/getWeather";
 
@@ -27,13 +29,23 @@ function App() {
 	const [weather, setWeather] = useState({});
 	const [showSearchBar, setShowSearchBar] = useState(false);
 	const [isCelsius, setIsCelsius] = useState(true);
+	const [city, setCity] = useState({ city: "potosi" });
+	const [city2, setCity2] = useState(undefined);
+	const [places, setPlaces] = useState([]);
 
 	useEffect(() => {
-		getWeather({ city: "potosi" }).then((data) => {
-			setWeather(data);
-		});
-	}, []);
+		getWeather({ city: city.city, lat: city.lat, long: city.long }).then(
+			(data) => {
+				setWeather(data);
+			}
+		);
+	}, [city]);
 
+	useEffect(() => {
+		getAutocomplete({ city: city2 }).then(setPlaces);
+	}, [city2]);
+
+	// console.log(places);
 	const { current, forecast, location } = weather;
 
 	if (!current || !forecast || !location) return;
@@ -57,7 +69,7 @@ function App() {
 		{ name: "Visibility", value: vis_km, unit: "km" },
 		{ name: "Air Pressure", value: pressure_mb, unit: "mb" }
 	];
-	console.log(forecast);
+	// console.log(forecast);
 
 	const FormatDate = (date, format = "ddd, DD MMM") => {
 		const dateForecast = dayjs(date).format(format);
@@ -65,6 +77,35 @@ function App() {
 	};
 	// ?Aside Date
 	const Today = FormatDate(new Date().toDateString(), "dddd");
+
+	// ? buscar ciudad
+	const searhCity = (e) => {
+		e.preventDefault();
+		const city = e.target.search.value;
+		// console.log(city);
+		setCity(city);
+		// setShowSearchBar(false);
+		e.target.search.value = "";
+		// return city;
+	};
+
+	const handleChange = (e) => {
+		const value = e.target.value;
+		if (value.length > 2) setCity2(value);
+	};
+
+	const debounceChange = debounce(handleChange, 800);
+
+	// ? seach para onCLick en LiItem
+
+	const searchPlace = (lat, long) => {
+		const coords = { lat, long };
+		// console.log(lat, long);
+		setCity(coords);
+		setShowSearchBar(false);
+	};
+
+	// console.log(city);
 
 	return (
 		<Flex direction="row" h="100vh" color="brand.100">
@@ -102,8 +143,15 @@ function App() {
 						alignSelf="end"
 						variant="ghost"
 					/>
-					<FormControl display="flex" justifyContent="space-between">
+					<FormControl
+						as="form"
+						onSubmit={searhCity}
+						display="flex"
+						justifyContent="space-between"
+					>
 						<Input
+							id="search"
+							onChange={debounceChange}
 							w={{ md: "60%", lg: "65%", xl: "70%" }}
 							placeholder="Search Location"
 							_focus={{ borderBlockColor: "white" }}
@@ -117,30 +165,25 @@ function App() {
 						spacing={2}
 						overflowY="auto"
 					>
-						<ListItem
-							py={4}
-							border="1px solid transparent"
-							_hover={{ border: "1px #616475 solid" }}
-							cursor="pointer"
-						>
-							London
-						</ListItem>
-						<ListItem
-							py={4}
-							border="1px solid transparent"
-							_hover={{ border: "1px #616475 solid" }}
-							cursor="pointer"
-						>
-							London
-						</ListItem>
-						<ListItem
-							py={4}
-							border="1px solid transparent"
-							_hover={{ border: "1px #616475 solid" }}
-							cursor="pointer"
-						>
-							London
-						</ListItem>
+						{" "}
+						{places.length === 0 ? (
+							<span>Loading...</span>
+						) : (
+							places.map((city, i) => (
+								<ListItem
+									key={i}
+									onClick={() =>
+										searchPlace(city.lat, city.lon)
+									}
+									py={4}
+									border="1px solid transparent"
+									_hover={{ border: "1px #616475 solid" }}
+									cursor="pointer"
+								>
+									{city.name}, {city.region}, {city.country}
+								</ListItem>
+							))
+						)}
 					</UnorderedList>
 				</Stack>
 				{/* /SearchBar */}
