@@ -30,7 +30,7 @@ function App() {
 	const [weather, setWeather] = useState({});
 	const [showSearchBar, setShowSearchBar] = useState(false);
 	const [isCelsius, setIsCelsius] = useState(true);
-	const [city, setCity] = useState({ city: "potosi" });
+	const [city, setCity] = useState({ city: "cochabamba" });
 	const [city2, setCity2] = useState(undefined);
 	const [places, setPlaces] = useState([]);
 
@@ -46,7 +46,7 @@ function App() {
 		getAutocomplete({ city: city2 }).then(setPlaces);
 	}, [city2]);
 
-	console.log(weather);
+	// console.log(weather);
 	const { current, forecast, location } = weather;
 
 	if (!current || !forecast || !location) return;
@@ -122,6 +122,31 @@ function App() {
 		if (direction === "NW") return "270deg";
 		if (direction === "N") return "315deg";
 	};
+
+	// ? Geolocalization
+
+	const ubicationUser = () => {
+		const options = {
+			enableHighAccuracy: true,
+			timeout: 6000,
+			maximumAge: 0
+		};
+
+		const success = ({ coords }) => {
+			setCity({ lat: coords.latitude, long: coords.longitude });
+		};
+
+		const error = (err) => {
+			console.log(err);
+		};
+
+		// useEffect(() => {
+		if (!navigator.geolocation) return;
+		navigator.geolocation.getCurrentPosition(success, error, options);
+		// }, []);
+	};
+
+	// console.log(location);
 
 	return (
 		<Flex direction="row" h="100vh" color="brand.100">
@@ -207,6 +232,7 @@ function App() {
 					<Button
 						colorScheme="whiteAlpha"
 						fontSize="sm"
+						fontWeight="500"
 						color="brand.100"
 						onClick={() =>
 							setShowSearchBar((prevState) => !prevState)
@@ -215,6 +241,7 @@ function App() {
 						Search for places
 					</Button>
 					<IconButton
+						onClick={ubicationUser}
 						color="brand.100"
 						icon={<MdGpsFixed />}
 						colorScheme="whiteAlpha"
@@ -286,8 +313,9 @@ function App() {
 			>
 				{/* Farenheit Celsius */}
 				<Stack direction="row" as="header" justify="end">
+					{/* TODO cambiar de Button a Box */}
 					{["°C", "°F"].map((unit, i) => (
-						<Box
+						<Button
 							key={i}
 							as="button"
 							onClick={() =>
@@ -318,7 +346,7 @@ function App() {
 							boxSize={10}
 						>
 							{unit}
-						</Box>
+						</Button>
 					))}
 				</Stack>
 				{/* Weather Cards */}
