@@ -205,7 +205,9 @@ function App() {
 				{/* /SearchBar */}
 				<Flex justify="space-between" p={6}>
 					<Button
+						colorScheme="whiteAlpha"
 						fontSize="sm"
+						color="brand.100"
 						onClick={() =>
 							setShowSearchBar((prevState) => !prevState)
 						}
@@ -213,7 +215,9 @@ function App() {
 						Search for places
 					</Button>
 					<IconButton
+						color="brand.100"
 						icon={<MdGpsFixed />}
+						colorScheme="whiteAlpha"
 						isRound="true"
 						fontSize="xl"
 					/>
