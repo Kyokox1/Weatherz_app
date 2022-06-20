@@ -175,7 +175,7 @@ export const Aside = ({
 					color="brand.100"
 					onClick={() => setShowSearchBar((prevState) => !prevState)}
 				>
-					Search for places
+					Search for placesasdasdasd
 				</Button>
 				<IconButton
 					onClick={ubicationUser}
