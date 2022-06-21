@@ -96,10 +96,11 @@ export const Aside = ({
 			direction="column"
 			as="aside"
 			pos="relative"
-			w="30%"
+			w={{ base: "100%", lg: "30%" }}
 			maxW={{ lg: "30%", xl: "25%" }}
 			bgColor="brand.500"
 			textAlign="center"
+			pb={{ base: "40px", lg: "0" }}
 		>
 			{/* SearchBar */}
 			<Stack
@@ -109,7 +110,7 @@ export const Aside = ({
 				right="0"
 				left="0"
 				pt={4}
-				px={6}
+				px={{ base: 3, md: 20, lg: 6 }}
 				bgColor="brand.500"
 				filter="auto"
 				opacity={showSearchBar ? 1 : 0}
@@ -134,7 +135,7 @@ export const Aside = ({
 					<Input
 						id="search"
 						onChange={debounceChange}
-						w={{ md: "60%", lg: "65%", xl: "70%" }}
+						w={{ base: "70%", md: "80%", lg: "65%", xl: "70%" }}
 						placeholder="Search Location"
 						_focus={{ borderBlockColor: "white" }}
 					/>
@@ -175,7 +176,7 @@ export const Aside = ({
 					color="brand.100"
 					onClick={() => setShowSearchBar((prevState) => !prevState)}
 				>
-					Search for placesasdasdasd
+					Search for places
 				</Button>
 				<IconButton
 					onClick={ubicationUser}

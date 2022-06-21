@@ -8,11 +8,15 @@ export const WeatherCardItem = ({ forecast, FormatDate, isCelsius }) => {
 			bgColor="brand.500"
 			flex="1"
 			py={2}
-			align="center"
+			alignItems="center"
 			fontSize="sm"
+			minW={{ base: "85%", md: "60%", lg: "auto" }}
 		>
 			<Text>{FormatDate(forecast.date)}</Text>
-			<Image src="/assets/images/HeavyCloud.png" h="70px" w="70px" />
+			<Image
+				src="/assets/images/HeavyCloud.png"
+				boxSize={{ base: "70px", lg: "60px", xl: "80px" }}
+			/>
 			<Flex justify="space-evenly" w="100%" pt={3}>
 				<Text>
 					{isCelsius

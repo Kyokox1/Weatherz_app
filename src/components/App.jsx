@@ -11,7 +11,6 @@ import { WeatherElements } from "./sections/WeatherElements/WeatherElements";
 
 function App() {
 	const [weather, setWeather] = useState({});
-
 	const [isCelsius, setIsCelsius] = useState(true);
 	const [city, setCity] = useState({ city: "cochabamba" });
 
@@ -50,7 +49,11 @@ function App() {
 	};
 
 	return (
-		<Flex direction="row" h="100vh" color="brand.100">
+		<Flex
+			direction={{ base: "column", lg: "row" }}
+			h={{ base: "auto", lg: "100vh" }}
+			color="brand.100"
+		>
 			{/* Aside */}
 			<Aside
 				FormatDate={FormatDate}
@@ -72,7 +75,12 @@ function App() {
 				px="5%"
 			>
 				{/* Farenheit Celsius */}
-				<Stack direction="row" as="header" justify="end">
+				<Stack
+					display={{ base: "none", lg: "flex" }}
+					direction="row"
+					as="header"
+					justify="end"
+				>
 					{/* TODO cambiar de Button a Box */}
 					{["°C", "°F"].map((unit, i) => (
 						<Button

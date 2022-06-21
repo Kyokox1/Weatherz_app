@@ -5,7 +5,12 @@ import { WeatherCardItem } from "./WeatherCardItem.jsx/WeatherCardItem";
 
 export const WeatherCards = ({ isCelsius, FormatDate, forecastday }) => {
 	return (
-		<Flex direction="row" gap={5} justify="space-between">
+		<Flex
+			direction={{ base: "column", lg: "row" }}
+			gap={{ base: 8, lg: 5 }}
+			justify="space-between"
+			align="center"
+		>
 			{/* WeatherCardItem */}
 			{forecastday.map((forecast) => (
 				<WeatherCardItem

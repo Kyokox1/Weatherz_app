@@ -42,11 +42,23 @@ export const WeatherElements = ({
 		if (direction === "N") return "315deg";
 	};
 	return (
-		<Stack>
-			<Heading as="h1" fontSize="2xl" py={2}>
+		<Stack pb={{ base: 20, lg: 0 }}>
+			<Heading
+				as="h1"
+				fontSize="2xl"
+				py={2}
+				pt={{ base: 10, lg: 2 }}
+				textAlign={{ base: "center", lg: "initial" }}
+			>
 				{`Today's Highlights`}
 			</Heading>
-			<Grid gridTemplateColumns="repeat(2,1fr)" gap={7}>
+			<Grid
+				gridTemplateColumns={{
+					base: "repeat(1,1fr)",
+					md: "repeat(2,1fr)"
+				}}
+				gap={{ base: 7, lg: 4, xl: 7 }}
+			>
 				{weatherParameters.map((parameter, i) => (
 					<GridItem
 						key={i}
@@ -85,7 +97,7 @@ export const WeatherElements = ({
 						<Box
 							display={i === 1 ? "flex" : "none"}
 							flexDirection="column"
-							w="65%"
+							w={{ base: "80%", md: "70%", xl: "65%" }}
 							fontSize="xs"
 							color="brand.200"
 						>
