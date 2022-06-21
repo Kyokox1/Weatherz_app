@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from "react";
-import { Flex, Stack, Button } from "@chakra-ui/react";
+import { Flex, Stack } from "@chakra-ui/react";
 import dayjs from "dayjs";
 
 import { getWeather } from "../services/getWeather";
@@ -8,6 +8,7 @@ import { getWeather } from "../services/getWeather";
 import { Aside } from "./sections/Aside/Aside";
 import { WeatherCards } from "./sections/WeatherCards/WeatherCards";
 import { WeatherElements } from "./sections/WeatherElements/WeatherElements";
+import { TempButtonsContainer } from "./sections/TemperatureButtons/TempButtonsContainer";
 
 function App() {
 	const [weather, setWeather] = useState({});
@@ -74,49 +75,11 @@ function App() {
 				pt={6}
 				px="5%"
 			>
-				{/* Farenheit Celsius */}
-				<Stack
-					display={{ base: "none", lg: "flex" }}
-					direction="row"
-					as="header"
-					justify="end"
-				>
-					{/* TODO cambiar de Button a Box */}
-					{["°C", "°F"].map((unit, i) => (
-						<Button
-							key={i}
-							as="button"
-							onClick={() =>
-								isCelsius
-									? i === 1 && setIsCelsius(false)
-									: i === 0 && setIsCelsius(true)
-							}
-							borderRadius="50%"
-							fontWeight="700"
-							bgColor={
-								isCelsius
-									? i === 0
-										? "brand.100"
-										: "brand.400"
-									: i === 1
-									? "brand.100"
-									: "brand.400"
-							}
-							color={
-								isCelsius
-									? i === 0
-										? "brand.600"
-										: "brand.100"
-									: i === 1
-									? "brand.600"
-									: "brand.100"
-							}
-							boxSize={10}
-						>
-							{unit}
-						</Button>
-					))}
-				</Stack>
+				{/* Farenheit Celsius Buttons */}
+				<TempButtonsContainer
+					isCelsius={isCelsius}
+					setIsCelsius={setIsCelsius}
+				/>
 				{/* Weather Cards */}
 				<WeatherCards
 					isCelsius={isCelsius}
