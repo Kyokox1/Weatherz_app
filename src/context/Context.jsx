@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import dayjs from "dayjs";
 
 export const WeatherContext = createContext({});
 
@@ -22,9 +23,16 @@ export const WeatherProvider = ({ children }) => {
 		return "/assets/images/HeavyCloud.png";
 	};
 
+	// ? Function Format for Date
+
+	const formatDate = (date, format = "ddd, DD MMM") => {
+		const dateForecast = dayjs(date).format(format);
+		return dateForecast;
+	};
+
 	return (
 		<WeatherContext.Provider
-			value={{ isCelsius, setIsCelsius, iconWeather }}
+			value={{ isCelsius, setIsCelsius, iconWeather, formatDate }}
 		>
 			{children}
 		</WeatherContext.Provider>

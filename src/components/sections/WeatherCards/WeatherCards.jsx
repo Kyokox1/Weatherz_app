@@ -3,7 +3,7 @@ import { Flex } from "@chakra-ui/react";
 
 import { WeatherCardItem } from "./WeatherCardItem.jsx/WeatherCardItem";
 
-export const WeatherCards = ({ FormatDate, forecastday }) => {
+export const WeatherCards = ({ forecastday }) => {
 	return (
 		<Flex
 			direction={{ base: "column", lg: "row" }}
@@ -15,7 +15,6 @@ export const WeatherCards = ({ FormatDate, forecastday }) => {
 			{forecastday.map((forecast) => (
 				<WeatherCardItem
 					key={forecast.date_epoch}
-					FormatDate={FormatDate}
 					forecast={forecast}
 				/>
 			))}

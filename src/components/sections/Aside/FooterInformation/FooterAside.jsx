@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 import { Box, Heading, Stack, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
+import { WeatherContext } from "../../../../context/Context";
 
 export const FooterAside = ({
 	isCelsius,
-	FormatDate,
 	temp_c,
 	temp_f,
 	condition,
@@ -12,7 +12,9 @@ export const FooterAside = ({
 	name
 }) => {
 	// ?Aside Date
-	const Today = FormatDate(new Date().toDateString(), "dddd");
+	const { formatDate } = useContext(WeatherContext);
+
+	const Today = formatDate(new Date().toDateString(), "dddd");
 	return (
 		<>
 			<Heading

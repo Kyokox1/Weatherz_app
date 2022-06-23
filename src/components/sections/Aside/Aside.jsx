@@ -9,7 +9,6 @@ import { ImageConditionAside } from "./ImageCondition/ImageConditionAside";
 import { FooterAside } from "./FooterInformation/FooterAside";
 
 export const Aside = ({
-	FormatDate,
 	setCity,
 	name,
 	country,
@@ -50,7 +49,6 @@ export const Aside = ({
 
 				<FooterAside
 					isCelsius={isCelsius}
-					FormatDate={FormatDate}
 					name={name}
 					country={country}
 					temp_c={temp_c}

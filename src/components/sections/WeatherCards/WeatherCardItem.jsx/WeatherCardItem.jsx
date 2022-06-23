@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { Flex, Image, Text } from "@chakra-ui/react";
 import { WeatherContext } from "../../../../context/Context";
 
-export const WeatherCardItem = ({ forecast, FormatDate }) => {
-	const { isCelsius, iconWeather } = useContext(WeatherContext);
+export const WeatherCardItem = ({ forecast }) => {
+	const { isCelsius, iconWeather, formatDate } = useContext(WeatherContext);
 
 	const imageWeather = iconWeather(forecast.day.condition.text);
 
@@ -17,7 +17,7 @@ export const WeatherCardItem = ({ forecast, FormatDate }) => {
 			fontSize="sm"
 			minW={{ base: "85%", md: "60%", lg: "auto" }}
 		>
-			<Text>{FormatDate(forecast.date)}</Text>
+			<Text>{formatDate(forecast.date)}</Text>
 			<Image
 				src={imageWeather}
 				boxSize={{ base: "70px", lg: "60px", xl: "80px" }}

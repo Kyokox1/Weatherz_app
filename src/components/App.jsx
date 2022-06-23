@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from "react";
 import { Flex, Stack } from "@chakra-ui/react";
-import dayjs from "dayjs";
 
 import { getWeather } from "../services/getWeather";
 
@@ -22,7 +21,6 @@ function App() {
 		);
 	}, [city]);
 
-	// console.log(weather);
 	const { current, forecast, location } = weather;
 
 	if (!current || !forecast || !location) return;
@@ -41,13 +39,6 @@ function App() {
 
 	const { forecastday } = forecast;
 
-	// ? Function Format for Date
-
-	const FormatDate = (date, format = "ddd, DD MMM") => {
-		const dateForecast = dayjs(date).format(format);
-		return dateForecast;
-	};
-
 	return (
 		<Flex
 			direction={{ base: "column", lg: "row" }}
@@ -56,7 +47,6 @@ function App() {
 		>
 			{/* Aside */}
 			<Aside
-				FormatDate={FormatDate}
 				setCity={setCity}
 				name={name}
 				country={country}
@@ -76,10 +66,7 @@ function App() {
 				{/* Farenheit Celsius Buttons */}
 				<TempButtonsContainer />
 				{/* Weather Cards */}
-				<WeatherCards
-					FormatDate={FormatDate}
-					forecastday={forecastday}
-				/>
+				<WeatherCards forecastday={forecastday} />
 				{/* Weather elements */}
 				<WeatherElements
 					humidity={humidity}
