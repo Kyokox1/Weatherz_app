@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Flex, Image, Text } from "@chakra-ui/react";
+import { WeatherContext } from "../../../../context/Context";
 
-export const WeatherCardItem = ({ forecast, FormatDate, isCelsius }) => {
+export const WeatherCardItem = ({ forecast, FormatDate }) => {
+	const { isCelsius, iconWeather } = useContext(WeatherContext);
+
+	const imageWeather = iconWeather(forecast.day.condition.text);
+
 	return (
 		<Flex
 			direction="column"
@@ -14,7 +19,7 @@ export const WeatherCardItem = ({ forecast, FormatDate, isCelsius }) => {
 		>
 			<Text>{FormatDate(forecast.date)}</Text>
 			<Image
-				src="/assets/images/HeavyCloud.png"
+				src={imageWeather}
 				boxSize={{ base: "70px", lg: "60px", xl: "80px" }}
 			/>
 			<Flex justify="space-evenly" w="100%" pt={3}>

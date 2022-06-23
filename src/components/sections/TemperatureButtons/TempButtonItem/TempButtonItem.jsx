@@ -1,7 +1,11 @@
 import { Box } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 
-export const TempButtonItem = ({ isCelsius, i, unit, setIsCelsius }) => {
+import { WeatherContext } from "../../../../context/Context";
+
+export const TempButtonItem = ({ i, unit }) => {
+	const { isCelsius, setIsCelsius } = useContext(WeatherContext);
+
 	return (
 		<Box
 			as="button"

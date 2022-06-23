@@ -2,7 +2,7 @@ import { Stack } from "@chakra-ui/react";
 import React from "react";
 import { TempButtonItem } from "./TempButtonItem/TempButtonItem";
 
-export const TempButtonsContainer = ({ isCelsius, setIsCelsius }) => {
+export const TempButtonsContainer = () => {
 	return (
 		<Stack
 			display={{ base: "none", lg: "flex" }}
@@ -12,13 +12,7 @@ export const TempButtonsContainer = ({ isCelsius, setIsCelsius }) => {
 		>
 			{/* TODO cambiar de Button a Box */}
 			{["°C", "°F"].map((unit, i) => (
-				<TempButtonItem
-					key={i}
-					unit={unit}
-					i={i}
-					isCelsius={isCelsius}
-					setIsCelsius={setIsCelsius}
-				/>
+				<TempButtonItem key={i} unit={unit} i={i} />
 			))}
 		</Stack>
 	);

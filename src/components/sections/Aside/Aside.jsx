@@ -1,72 +1,34 @@
 /* eslint-disable camelcase */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
 	Box,
 	Button,
 	Flex,
-	FormControl,
 	Heading,
 	IconButton,
 	Image,
-	Input,
-	ListItem,
 	Stack,
-	Text,
-	UnorderedList
+	Text
 } from "@chakra-ui/react";
-import { MdGpsFixed, MdGpsNotFixed, MdClose } from "react-icons/md";
-import debounce from "just-debounce-it";
+import { MdGpsFixed, MdGpsNotFixed } from "react-icons/md";
 
-import { getAutocomplete } from "../../../services/getAutocomplete";
+import { SearchBar } from "./SearchBar/SearchBar";
+import { WeatherContext } from "../../../context/Context";
 
 export const Aside = ({
 	FormatDate,
 	setCity,
 	name,
 	country,
-	isCelsius,
 	temp_c,
 	temp_f,
 	condition
 }) => {
 	const [showSearchBar, setShowSearchBar] = useState(false);
-	const [city2, setCity2] = useState(undefined);
-	const [places, setPlaces] = useState([]);
-
-	useEffect(() => {
-		getAutocomplete({ city: city2 }).then(setPlaces);
-	}, [city2]);
+	const { isCelsius, iconWeather } = useContext(WeatherContext);
 
 	// ?Aside Date
 	const Today = FormatDate(new Date().toDateString(), "dddd");
-
-	// ? Search City
-	const searhCity = (e) => {
-		e.preventDefault();
-
-		const city = e.target.search.value;
-
-		setCity({ city });
-		setShowSearchBar(false);
-		e.target.search.value = "";
-	};
-
-	// ? Debounce Search
-	const handleChange = (e) => {
-		const value = e.target.value;
-		if (value.length > 2) setCity2(value);
-	};
-
-	const debounceChange = debounce(handleChange, 700);
-
-	// ? search para onCLick en LiItem
-
-	const searchPlace = (lat, long) => {
-		const coords = { lat, long };
-
-		setCity(coords);
-		setShowSearchBar(false);
-	};
 
 	// ? Geolocalization
 
@@ -91,6 +53,8 @@ export const Aside = ({
 		// }, []);
 	};
 
+	const imageWeather = iconWeather(condition.text);
+
 	return (
 		<Flex
 			direction="column"
@@ -103,70 +67,11 @@ export const Aside = ({
 			pb={{ base: "40px", lg: "0" }}
 		>
 			{/* SearchBar */}
-			<Stack
-				pos="absolute"
-				top="0"
-				bottom="0"
-				right="0"
-				left="0"
-				pt={4}
-				px={{ base: 3, md: 20, lg: 6 }}
-				bgColor="brand.500"
-				filter="auto"
-				opacity={showSearchBar ? 1 : 0}
-				visibility={showSearchBar ? "visible" : "hidden"}
-				transition="all .3s ease-out"
-				zIndex="100"
-				spacing={8}
-			>
-				<IconButton
-					icon={<MdClose />}
-					onClick={() => setShowSearchBar(false)}
-					fontSize="3xl"
-					alignSelf="end"
-					variant="ghost"
-				/>
-				<FormControl
-					as="form"
-					onSubmit={searhCity}
-					display="flex"
-					justifyContent="space-between"
-				>
-					<Input
-						id="search"
-						onChange={debounceChange}
-						w={{ base: "70%", md: "80%", lg: "65%", xl: "70%" }}
-						placeholder="Search Location"
-						_focus={{ borderBlockColor: "white" }}
-					/>
-					<Button type="submit" colorScheme="blue">
-						Search
-					</Button>
-				</FormControl>
-				<UnorderedList
-					listStyleType="none"
-					spacing={2}
-					overflowY="auto"
-				>
-					{" "}
-					{places.length === 0 ? (
-						<span>Loading...</span>
-					) : (
-						places.map((city, i) => (
-							<ListItem
-								key={i}
-								onClick={() => searchPlace(city.lat, city.lon)}
-								py={4}
-								border="1px solid transparent"
-								_hover={{ border: "1px #616475 solid" }}
-								cursor="pointer"
-							>
-								{city.name}, {city.region}, {city.country}
-							</ListItem>
-						))
-					)}
-				</UnorderedList>
-			</Stack>
+			<SearchBar
+				setCity={setCity}
+				setShowSearchBar={setShowSearchBar}
+				showSearchBar={showSearchBar}
+			/>
 			{/* /SearchBar */}
 			<Flex justify="space-between" p={6}>
 				<Button
@@ -202,7 +107,7 @@ export const Aside = ({
 						filter="auto"
 						opacity="10%"
 					></Box>
-					<Image src="/assets/images/LightRain.png" m="0 auto" />
+					<Image src={imageWeather} m="0 auto" />
 				</Box>
 				<Heading
 					as="h3"

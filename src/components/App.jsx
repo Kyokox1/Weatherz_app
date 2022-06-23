@@ -12,7 +12,6 @@ import { TempButtonsContainer } from "./sections/TemperatureButtons/TempButtonsC
 
 function App() {
 	const [weather, setWeather] = useState({});
-	const [isCelsius, setIsCelsius] = useState(true);
 	const [city, setCity] = useState({ city: "cochabamba" });
 
 	useEffect(() => {
@@ -64,7 +63,6 @@ function App() {
 				temp_c={temp_c}
 				temp_f={temp_f}
 				condition={condition}
-				isCelsius={isCelsius}
 			/>
 			{/* Main */}
 			<Stack
@@ -76,13 +74,9 @@ function App() {
 				px="5%"
 			>
 				{/* Farenheit Celsius Buttons */}
-				<TempButtonsContainer
-					isCelsius={isCelsius}
-					setIsCelsius={setIsCelsius}
-				/>
+				<TempButtonsContainer />
 				{/* Weather Cards */}
 				<WeatherCards
-					isCelsius={isCelsius}
 					FormatDate={FormatDate}
 					forecastday={forecastday}
 				/>
