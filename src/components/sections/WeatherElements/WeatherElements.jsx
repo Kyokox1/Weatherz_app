@@ -35,7 +35,7 @@ export const WeatherElements = ({
 					base: "repeat(1,1fr)",
 					md: "repeat(2,1fr)"
 				}}
-				gap={{ base: 7, lg: 4, xl: 7 }}
+				gap={{ base: 7, lg: 4, xl: 6, "2xl": 12 }}
 			>
 				{/* WeatherCards */}
 				{weatherParameters.map((parameter, i) => (

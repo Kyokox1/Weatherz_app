@@ -73,10 +73,14 @@ function App() {
 				</Flex>
 			) : (
 				<Stack
-					display={showSearchBar && { base: "none", lg: "flex" }}
+					display={
+						showSearchBar ? { base: "none", lg: "flex" } : "flex"
+					}
 					direction={"column"}
 					as="main"
 					flex="1"
+					h="100vh"
+					justifyContent="space-evenly"
 					bgColor="brand.600"
 					pt={6}
 					px="5%"
