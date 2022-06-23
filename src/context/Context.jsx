@@ -6,6 +6,8 @@ export const WeatherContext = createContext({});
 export const WeatherProvider = ({ children }) => {
 	const [isCelsius, setIsCelsius] = useState(true);
 
+	const [showSearchBar, setShowSearchBar] = useState(false);
+
 	const iconWeather = (text) => {
 		text = text.toLowerCase();
 		if (text.includes("thunder")) return "/assets/images/Thunderstorm.png";
@@ -32,7 +34,14 @@ export const WeatherProvider = ({ children }) => {
 
 	return (
 		<WeatherContext.Provider
-			value={{ isCelsius, setIsCelsius, iconWeather, formatDate }}
+			value={{
+				isCelsius,
+				setIsCelsius,
+				iconWeather,
+				formatDate,
+				showSearchBar,
+				setShowSearchBar
+			}}
 		>
 			{children}
 		</WeatherContext.Provider>

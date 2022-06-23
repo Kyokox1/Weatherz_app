@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-import React, { useContext, useState } from "react";
-import { Flex, Stack } from "@chakra-ui/react";
+import React, { useContext } from "react";
+import { Flex, Spinner, Stack } from "@chakra-ui/react";
 
 import { WeatherContext } from "../../../context/Context";
 import { SearchBar } from "./SearchBar/SearchBar";
@@ -14,9 +14,9 @@ export const Aside = ({
 	country,
 	temp_c,
 	temp_f,
-	condition
+	condition,
+	loading
 }) => {
-	const [showSearchBar, setShowSearchBar] = useState(false);
 	const { isCelsius, iconWeather } = useContext(WeatherContext);
 
 	const imageWeather = iconWeather(condition.text);
@@ -26,36 +26,38 @@ export const Aside = ({
 			direction="column"
 			as="aside"
 			pos="relative"
+			h="100vh"
 			w={{ base: "100%", lg: "30%" }}
 			maxW={{ lg: "30%", xl: "25%" }}
 			bgColor="brand.500"
 			textAlign="center"
-			pb={{ base: "40px", lg: "0" }}
+			pb={{ base: "20px", lg: "0" }}
 		>
 			{/* SearchBar */}
-			<SearchBar
-				setCity={setCity}
-				setShowSearchBar={setShowSearchBar}
-				showSearchBar={showSearchBar}
-			/>
+			<SearchBar setCity={setCity} />
 			{/* /SearchBar */}
-			<HeaderButtonsAside
-				setShowSearchBar={setShowSearchBar}
-				setCity={setCity}
-			/>
+			{loading ? (
+				<Flex h="100%" w="100%" justify="center" align="center">
+					<Spinner color="blue" size="xl" />
+				</Flex>
+			) : (
+				<>
+					<HeaderButtonsAside setCity={setCity} />
 
-			<Stack flex="1" justify="space-around" color="brand.200">
-				<ImageConditionAside imageWeather={imageWeather} />
+					<Stack flex="1" justify="space-around" color="brand.200">
+						<ImageConditionAside imageWeather={imageWeather} />
 
-				<FooterAside
-					isCelsius={isCelsius}
-					name={name}
-					country={country}
-					temp_c={temp_c}
-					temp_f={temp_f}
-					condition={condition}
-				/>
-			</Stack>
+						<FooterAside
+							isCelsius={isCelsius}
+							name={name}
+							country={country}
+							temp_c={temp_c}
+							temp_f={temp_f}
+							condition={condition}
+						/>
+					</Stack>
+				</>
+			)}
 		</Flex>
 	);
 };

@@ -1,9 +1,11 @@
 import { Button, Flex, IconButton } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 
 import { MdGpsFixed, MdGpsNotFixed } from "react-icons/md";
+import { WeatherContext } from "../../../../context/Context";
 
-export const HeaderButtonsAside = ({ setShowSearchBar, setCity }) => {
+export const HeaderButtonsAside = ({ setCity }) => {
+	const { setShowSearchBar } = useContext(WeatherContext);
 	// ? Geolocalization
 
 	const ubicationUser = () => {

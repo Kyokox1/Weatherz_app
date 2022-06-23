@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
 	Button,
 	FormControl,
@@ -12,10 +12,12 @@ import debounce from "just-debounce-it";
 
 import { MdClose } from "react-icons/md";
 import { getAutocomplete } from "../../../../services/getAutocomplete";
+import { WeatherContext } from "../../../../context/Context";
 
-export const SearchBar = ({ showSearchBar, setShowSearchBar, setCity }) => {
+export const SearchBar = ({ setCity }) => {
 	const [city2, setCity2] = useState(undefined);
 	const [places, setPlaces] = useState([]);
+	const { showSearchBar, setShowSearchBar } = useContext(WeatherContext);
 
 	useEffect(() => {
 		getAutocomplete({ city: city2 }).then(setPlaces);
