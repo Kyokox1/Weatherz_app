@@ -68,6 +68,7 @@ function App() {
 					flex="1"
 					justify="center"
 					align="center"
+					bgColor="brand.600"
 				>
 					<Spinner color="blue" size="xl" />
 				</Flex>
