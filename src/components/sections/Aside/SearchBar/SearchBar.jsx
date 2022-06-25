@@ -58,8 +58,6 @@ export const SearchBar = ({ setCity }) => {
 
 	const debounceChange = debounce(handleChange, 700);
 
-	const noResults = () => {};
-
 	return (
 		<Stack
 			pos="absolute"
@@ -114,11 +112,10 @@ export const SearchBar = ({ setCity }) => {
 						justify="center"
 						align="center"
 						bgColor="brand.500"
+						zIndex="100"
 					>
 						<Spinner color="blue" size="xl" />
 					</Flex>
-				) : places.length === 0 ? (
-					<span>No Results :c</span>
 				) : (
 					places.map((city, i) => (
 						<ListItem
@@ -133,6 +130,7 @@ export const SearchBar = ({ setCity }) => {
 						</ListItem>
 					))
 				)}
+				{places.length === 0 && <span>No Results :c</span>}
 			</UnorderedList>
 		</Stack>
 	);
