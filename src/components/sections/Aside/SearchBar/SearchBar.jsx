@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
 	Button,
+	Flex,
 	FormControl,
 	IconButton,
 	Input,
 	ListItem,
+	Spinner,
 	Stack,
 	UnorderedList
 } from "@chakra-ui/react";
@@ -16,11 +18,16 @@ import { WeatherContext } from "../../../../context/Context";
 
 export const SearchBar = ({ setCity }) => {
 	const [city2, setCity2] = useState(undefined);
+	const [isLoading, setIsLoading] = useState(true);
 	const [places, setPlaces] = useState([]);
 	const { showSearchBar, setShowSearchBar } = useContext(WeatherContext);
 
 	useEffect(() => {
-		getAutocomplete({ city: city2 }).then(setPlaces);
+		setIsLoading(true);
+		getAutocomplete({ city: city2 }).then((data) => {
+			setPlaces(data);
+			setIsLoading(false);
+		});
 	}, [city2]);
 
 	// ? Search City
@@ -92,10 +99,22 @@ export const SearchBar = ({ setCity }) => {
 					Search
 				</Button>
 			</FormControl>
-			<UnorderedList listStyleType="none" spacing={2} overflowY="auto">
+			<UnorderedList
+				flex="1"
+				listStyleType="none"
+				spacing={2}
+				overflowY="auto"
+			>
 				{" "}
-				{places.length === 0 ? (
-					<span>Loading...</span>
+				{isLoading ? (
+					<Flex
+						h="100%"
+						justify="center"
+						align="center"
+						bgColor="brand.500"
+					>
+						<Spinner color="blue" size="xl" />
+					</Flex>
 				) : (
 					places.map((city, i) => (
 						<ListItem

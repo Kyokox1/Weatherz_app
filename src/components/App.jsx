@@ -13,7 +13,7 @@ import { WeatherContext } from "../context/Context";
 function App() {
 	const [weather, setWeather] = useState({});
 	const [city, setCity] = useState({ city: "cochabamba" });
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const { showSearchBar } = useContext(WeatherContext);
 
 	useEffect(() => {

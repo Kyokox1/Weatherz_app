@@ -32,7 +32,7 @@ export const WeatherElements = ({
 			</Heading>
 			<Grid
 				gridTemplateColumns={{
-					base: "repeat(1,1fr)",
+					base: "1fr",
 					md: "repeat(2,1fr)"
 				}}
 				gap={{ base: 7, lg: 4, xl: 6, "2xl": 12 }}
