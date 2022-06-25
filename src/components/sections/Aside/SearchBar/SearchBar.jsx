@@ -112,7 +112,6 @@ export const SearchBar = ({ setCity }) => {
 						justify="center"
 						align="center"
 						bgColor="brand.500"
-						zIndex="100"
 					>
 						<Spinner color="blue" size="xl" />
 					</Flex>
