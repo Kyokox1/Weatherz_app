@@ -1,7 +1,7 @@
 import { Button, Flex, IconButton } from "@chakra-ui/react";
 import React, { useContext } from "react";
 
-import { MdGpsFixed, MdGpsNotFixed } from "react-icons/md";
+import { MdGpsFixed } from "react-icons/md";
 import { WeatherContext } from "../../../../context/Context";
 
 export const HeaderButtonsAside = ({ setCity }) => {

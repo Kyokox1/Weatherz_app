@@ -31,7 +31,7 @@ export const SearchBar = ({ setCity }) => {
 	}, [city2]);
 
 	// ? Search City
-	const searhCity = (e) => {
+	const searchCity = (e) => {
 		e.preventDefault();
 
 		const city = e.target.search.value;
@@ -80,11 +80,12 @@ export const SearchBar = ({ setCity }) => {
 				onClick={() => setShowSearchBar(false)}
 				fontSize="3xl"
 				alignSelf="end"
-				variant="ghost"
+				color="brand.100"
+				colorScheme="whiteAlpha"
 			/>
 			<FormControl
 				as="form"
-				onSubmit={searhCity}
+				onSubmit={searchCity}
 				display="flex"
 				justifyContent="space-between"
 			>
