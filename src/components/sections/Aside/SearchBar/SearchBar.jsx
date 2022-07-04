@@ -81,7 +81,9 @@ export const SearchBar = ({ setCity }) => {
 				fontSize="3xl"
 				alignSelf="end"
 				color="brand.100"
-				colorScheme="whiteAlpha"
+				_hover={{
+					bgColor: "brand.400"
+				}}
 			/>
 			<FormControl
 				as="form"
