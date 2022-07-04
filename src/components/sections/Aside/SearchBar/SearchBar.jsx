@@ -81,6 +81,7 @@ export const SearchBar = ({ setCity }) => {
 				fontSize="3xl"
 				alignSelf="end"
 				color="brand.100"
+				aria-label="close"
 				bgColor="transparent"
 				_hover={{
 					bgColor: "brand.400"

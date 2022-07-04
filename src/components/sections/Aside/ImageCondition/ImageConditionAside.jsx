@@ -17,7 +17,7 @@ export const ImageConditionAside = ({ imageWeather }) => {
 				filter="auto"
 				opacity="10%"
 			/>
-			<Image src={imageWeather} m="0 auto" />
+			<Image src={imageWeather} m="0 auto" alt="Weather" />
 		</Box>
 	);
 };

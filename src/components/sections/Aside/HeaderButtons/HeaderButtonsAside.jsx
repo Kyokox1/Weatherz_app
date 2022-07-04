@@ -41,8 +41,9 @@ export const HeaderButtonsAside = ({ setCity }) => {
 			</Button>
 			<IconButton
 				onClick={ubicationUser}
-				color="brand.100"
 				icon={<MdGpsFixed />}
+				color="brand.100"
+				aria-label="gps"
 				colorScheme="whiteAlpha"
 				isRound="true"
 				fontSize="xl"

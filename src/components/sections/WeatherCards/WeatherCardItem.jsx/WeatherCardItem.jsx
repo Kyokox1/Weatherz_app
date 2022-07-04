@@ -21,6 +21,7 @@ export const WeatherCardItem = ({ forecast }) => {
 			<Image
 				src={imageWeather}
 				boxSize={{ base: "70px", lg: "60px", xl: "80px" }}
+				alt="WeatherCondition"
 			/>
 			<Flex justify="space-evenly" w="100%" pt={3}>
 				<Text>
