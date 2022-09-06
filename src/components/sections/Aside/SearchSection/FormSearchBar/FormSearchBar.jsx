@@ -2,7 +2,7 @@ import { Button, FormControl, Input } from "@chakra-ui/react";
 import debounce from "just-debounce-it";
 import React from "react";
 
-export const FormSearchBar = ({ setCity, setShowSearchBar, setCity2 }) => {
+const FormSearchBar = ({ setCity, setShowSearchBar, onChange }) => {
 	// ? Search City
 	const searchCity = (e) => {
 		e.preventDefault();
@@ -17,7 +17,7 @@ export const FormSearchBar = ({ setCity, setShowSearchBar, setCity2 }) => {
 	// ? Debounce Search
 	const handleChange = (e) => {
 		const value = e.target.value;
-		if (value.length > 2) setCity2(value);
+		onChange(value);
 	};
 
 	const debounceChange = debounce(handleChange, 700);
@@ -42,3 +42,5 @@ export const FormSearchBar = ({ setCity, setShowSearchBar, setCity2 }) => {
 		</FormControl>
 	);
 };
+
+export default React.memo(FormSearchBar);

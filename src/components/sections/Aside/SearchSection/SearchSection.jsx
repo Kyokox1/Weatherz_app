@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { IconButton, Stack } from "@chakra-ui/react";
 
 import { MdClose } from "react-icons/md";
 import { getAutocomplete } from "../../../../services/getAutocomplete";
 import { WeatherContext } from "../../../../context/Context";
-import { FormSearchBar } from "./FormSearchBar/FormSearchBar";
+import FormSearchBar from "./FormSearchBar/FormSearchBar";
 import { CitiesList } from "./CitiesList/CitiesList";
 
 export const SearchSection = ({ setCity }) => {
@@ -20,6 +20,13 @@ export const SearchSection = ({ setCity }) => {
 			setIsLoading(false);
 		});
 	}, [city2]);
+
+	const handleChange = useCallback(
+		(value) => {
+			if (value.length > 2) setCity2(value);
+		},
+		[city2]
+	);
 
 	return (
 		<Stack
@@ -53,7 +60,7 @@ export const SearchSection = ({ setCity }) => {
 			<FormSearchBar
 				setCity={setCity}
 				setShowSearchBar={setShowSearchBar}
-				setCity2={setCity2}
+				onChange={handleChange}
 			/>
 
 			<CitiesList
