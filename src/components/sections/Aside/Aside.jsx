@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { Flex, Spinner, Stack } from "@chakra-ui/react";
 
 import { WeatherContext } from "../../../context/Context";
-import { SearchBar } from "./SearchBar/SearchBar";
+import { SearchSection } from "./SearchSection/SearchSection";
 import { HeaderButtonsAside } from "./HeaderButtons/HeaderButtonsAside";
 import { ImageConditionAside } from "./ImageCondition/ImageConditionAside";
 import { FooterAside } from "./FooterInformation/FooterAside";
@@ -34,7 +34,7 @@ export const Aside = ({
 			pb={{ base: "20px", lg: "0" }}
 		>
 			{/* SearchBar */}
-			<SearchBar setCity={setCity} />
+			<SearchSection setCity={setCity} />
 			{/* /SearchBar */}
 			{loading ? (
 				<Flex h="100%" w="100%" justify="center" align="center">
